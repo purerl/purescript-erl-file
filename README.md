@@ -1,3 +1,3 @@
-# purescript-erl-atom
+# purescript-erl-file
 
-Create Erlang atoms from Strings for use in accessing native libraries. ADTs compile down to tuples including atoms, but in many cases APIs require e.g. returning a specific atom, which we would otherwise have to do via FFI.
+Basic wrapper around erlang `file` and `filelib` modules.
