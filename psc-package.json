@@ -1,0 +1,12 @@
+{
+  "name": "purescript-erl-file",
+  "set": "erl-0.13.2-20190808",
+  "source": "https://github.com/purerl/package-sets.git",
+  "depends": [
+    "assert",
+    "debug",
+    "erl-atom",
+    "erl-binary",
+    "prelude"
+  ]
+}

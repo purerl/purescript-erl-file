@@ -1,0 +1,5 @@
+ebin/
+output/
+.psc-package/
+.psc-ide-port
+*.dump
