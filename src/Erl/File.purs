@@ -1,6 +1,7 @@
 module Erl.File
 ( readFile
 , writeFile
+, deleteDir
 , deleteFile
 , listDir
 , readFileInfo
@@ -90,3 +91,8 @@ atomToFileAccess a
   | a == atom "write" = Just Write
   | a == atom "read_write" = Just ReadWrite
   | otherwise = Nothing
+
+foreign import deleteDir_ :: String -> Effect (ReasonResult Unit)
+
+deleteDir :: String -> Effect (Either Reason Unit)
+deleteDir f = standardResultToEither <$> deleteDir_ f

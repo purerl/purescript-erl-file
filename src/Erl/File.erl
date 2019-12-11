@@ -1,5 +1,5 @@
 -module(erl_file@foreign).
--export([writeFile_/2, readFile_/1, deleteFile_/1, listDir_/1, readFileInfo_/3]).
+-export([writeFile_/2, readFile_/1, deleteFile_/1, listDir_/1, readFileInfo_/3, deleteDir_/1]).
 
 -include_lib("kernel/include/file.hrl").
 
@@ -60,3 +60,6 @@ readFileInfo_(AtomToFileType, AtomToFileAccess, Filename) -> fun() ->
   end
 end.
 
+deleteDir_ (DirectoryName) -> fun() ->
+  file:del_dir(DirectoryName)
+end.
