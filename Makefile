@@ -1,13 +1,16 @@
-.PHONY: ps erl all test
+.PHONY: ps erl all test clean distclean
 
-all: ps erl
+.DEFAULT_GOAL := ps
+
+all: test
 
 ps:
-	psc-package sources | xargs purs compile 'src/**/*.purs' 'test/**/*.purs'
+	@spago build
 
-test: ps erl
-	erl -pa ebin -noshell -eval '(test_main@ps:main())()' -eval 'init:stop()'
+clean:
+	rm -rf output
 
-erl:
-	mkdir -p ebin
-	erlc -o ebin/ output/*/*.erl
+distclean: clean
+	rm -rf .spago
+test: 
+	@spago -x test.dhall test

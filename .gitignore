@@ -1,5 +1,5 @@
-ebin/
-output/
-.psc-package/
+.spago
+output
 .psc-ide-port
+ebin/
 *.dump
