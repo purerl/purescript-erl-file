@@ -2,6 +2,7 @@ module Erl.File
 ( readFile
 , writeFile
 , deleteDir
+, deleteDirRecursive
 , deleteFile
 , listDir
 , readFileInfo
@@ -96,3 +97,8 @@ foreign import deleteDir_ :: String -> Effect (ReasonResult Unit)
 
 deleteDir :: String -> Effect (Either Reason Unit)
 deleteDir f = standardResultToEither <$> deleteDir_ f
+
+foreign import deleteDirRecursive_ :: String -> Effect (ReasonResult Unit)
+
+deleteDirRecursive :: String -> Effect (Either Reason Unit)
+deleteDirRecursive f = standardResultToEither <$> deleteDirRecursive_ f

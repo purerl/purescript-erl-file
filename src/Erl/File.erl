@@ -1,5 +1,5 @@
 -module(erl_file@foreign).
--export([writeFile_/2, readFile_/1, deleteFile_/1, listDir_/1, readFileInfo_/3, deleteDir_/1]).
+-export([writeFile_/2, readFile_/1, deleteFile_/1, listDir_/1, readFileInfo_/3, deleteDir_/1, deleteDirRecursive_/1]).
 
 -include_lib("kernel/include/file.hrl").
 
@@ -27,7 +27,7 @@ readFileInfo_(AtomToFileType, AtomToFileAccess, Filename) -> fun() ->
 
   Result = file:read_file_info(Filename, [{time, posix}]),
 
-  case Result of 
+  case Result of
     {ok, #file_info{ size = Size
                    , type = FileType
                    , access = Access
@@ -40,9 +40,9 @@ readFileInfo_(AtomToFileType, AtomToFileAccess, Filename) -> fun() ->
                    , minor_device = MinorDevice
                    , inode = INode
                    , uid = Uid
-                   , gid = Gid }} -> 
-                     
-                    {ok, #{ size => Size     
+                   , gid = Gid }} ->
+
+                    {ok, #{ size => Size
                           , type => AtomToFileType(FileType)
                           , access => AtomToFileAccess(Access)
                           , atime => ATime
@@ -62,4 +62,8 @@ end.
 
 deleteDir_ (DirectoryName) -> fun() ->
   file:del_dir(DirectoryName)
+end.
+
+deleteDirRecursive_ (DirectoryName) -> fun() ->
+  file:del_dir_r(DirectoryName)
 end.
